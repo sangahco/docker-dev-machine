@@ -1,0 +1,69 @@
+version: "3"
+
+services:
+  dev-apache:
+    build: apache
+    image: "dev-apache"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/home/sangah:/home/sangah:ro"
+      - "/etc/letsencrypt:/etc/letsencrypt:ro"
+      - "/var/www:/var/www"
+      - "/var/log/apache2/docker:/var/log/apache2"
+    links:
+      - fileserver
+    environment:
+      - APACHE_SSL=1
+    #restart: "unless-stopped"
+
+  fileserver-php:
+    image: php:5.6-fpm
+    volumes:
+    - ngx:/etc/nginx/www
+    #restart: "unless-stopped"
+
+  fileserver:
+    image: dev.sangah.com:5043/pmis-fileupload
+    volumes:
+    - ngx:/etc/nginx/www
+    - /tmp:/tmp
+    links:
+    - fileserver-php
+    expose:
+    - "8180"
+    #restart: "unless-stopped"
+
+  owncloud:
+    image: owncloud:8.2.9
+    #volumes:
+    #- ./owncloud/config.php:/var/www/html/config/config.php
+    #- /home/cloud/data:/var/www/html/data
+    ports:
+    - "18080:80"
+    extra_hosts:
+    - db:203.239.21.121
+    links:
+    - mysql:db
+
+  mysql:
+    image: mysql:5.5
+    ports:
+    - "13306:3306"
+    volumes:
+    - /var/lib/mysql:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - "18090:80"
+    environment: 
+    - MYSQL_ROOT_PASSWORD
+    links:
+    - mysql:db
+
+volumes:
+  ngx:
