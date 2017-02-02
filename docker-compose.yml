@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 
 services:
   dev-apache:
@@ -15,55 +15,55 @@ services:
     links:
       - fileserver
     environment:
-      - APACHE_SSL=1
-    #restart: "unless-stopped"
+      - APACHE_SSL
+    restart: "unless-stopped"
 
   fileserver-php:
     image: php:5.6-fpm
     volumes:
-    - ngx:/etc/nginx/www
-    #restart: "unless-stopped"
+      - ngx:/etc/nginx/www
+    restart: "unless-stopped"
 
   fileserver:
     image: dev.sangah.com:5043/pmis-fileupload
     volumes:
-    - ngx:/etc/nginx/www
-    - /tmp:/tmp
+      - ngx:/etc/nginx/www
+      - /tmp:/tmp
     links:
-    - fileserver-php
+      - fileserver-php:php
     expose:
-    - "8180"
-    #restart: "unless-stopped"
+      - "8180"
+    restart: "unless-stopped"
 
   owncloud:
     image: owncloud:8.2.9
-    #volumes:
-    #- ./owncloud/config.php:/var/www/html/config/config.php
-    #- /home/cloud/data:/var/www/html/data
+    volumes:
+    - ./owncloud/config.php:/var/www/html/config/config.php
+    - /home/cloud/data:/var/www/html/data
     ports:
-    - "18080:80"
-    extra_hosts:
-    - db:203.239.21.121
+      - "18080:80"
     links:
-    - mysql:db
+      - mysql:db
+      - dev-apache:proxy
 
   mysql:
     image: mysql:5.5
     ports:
-    - "13306:3306"
+      - "13306:3306"
     volumes:
-    - /var/lib/mysql:/var/lib/mysql
+      - ./mysql:/etc/mysql/conf.d
+      - /var/lib/mysql:/var/lib/mysql 
     environment:
-    - MYSQL_ROOT_PASSWORD
+      - MYSQL_ROOT_PASSWORD
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-    - "18090:80"
+      - "18090:80"
     environment: 
-    - MYSQL_ROOT_PASSWORD
+      - MYSQL_ROOT_PASSWORD
     links:
-    - mysql:db
+      - mysql:db
 
 volumes:
   ngx:

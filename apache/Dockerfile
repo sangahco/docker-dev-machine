@@ -34,6 +34,7 @@ RUN set -xe \
     && /usr/sbin/a2ensite pmis-manual.conf \
     && /usr/sbin/a2ensite maven.conf \
     && /usr/sbin/a2ensite mysqladmin.conf \
+    && /usr/sbin/a2ensite owncloud.conf \
 
     # ENABLE CONFIGURATIONS
     && /usr/sbin/a2enconf ssl.conf \
