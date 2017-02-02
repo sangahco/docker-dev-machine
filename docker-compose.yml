@@ -31,8 +31,6 @@ services:
       - /tmp:/tmp
     links:
       - fileserver-php:php
-    expose:
-      - "8180"
     restart: "unless-stopped"
 
   owncloud:
@@ -40,16 +38,16 @@ services:
     volumes:
     - ./owncloud/config.php:/var/www/html/config/config.php
     - /home/cloud/data:/var/www/html/data
-    ports:
-      - "18080:80"
+    #ports:
+    #  - "18080:80"
     links:
       - mysql:db
       - dev-apache:proxy
 
   mysql:
     image: mysql:5.5
-    ports:
-      - "13306:3306"
+    #ports:
+    #  - "3306"
     volumes:
       - ./mysql:/etc/mysql/conf.d
       - /var/lib/mysql:/var/lib/mysql 
