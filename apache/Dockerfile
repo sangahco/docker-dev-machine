@@ -3,10 +3,7 @@ MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 RUN apt-get update && apt-get -y install \
     apache2 \
-    php5 \
-    php5-mysql \
     libapache2-mod-jk \
-    libapache2-mod-php5 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -32,9 +29,8 @@ RUN set -xe \
     && /usr/sbin/a2ensite devnote.conf \
     && /usr/sbin/a2ensite stnd-pmis.conf \
     && /usr/sbin/a2ensite pmis-manual.conf \
-    && /usr/sbin/a2ensite maven.conf \
-    && /usr/sbin/a2ensite mysqladmin.conf \
-    && /usr/sbin/a2ensite owncloud.conf \
+    && /usr/sbin/a2enconf maven.conf \
+    && /usr/sbin/a2enconf owncloud.conf \
 
     # ENABLE CONFIGURATIONS
     && /usr/sbin/a2enconf ssl.conf \
