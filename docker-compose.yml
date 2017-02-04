@@ -1,9 +1,8 @@
 version: "2"
 
 services:
-  dev-apache:
-    build: apache
-    image: "dev-apache"
+  httpd:
+    build: httpd
     ports:
       - "80:80"
       - "443:443"
@@ -42,7 +41,8 @@ services:
     #  - "18080:80"
     links:
       - mysql:db
-      - dev-apache:proxy
+      - httpd:proxy
+    restart: "unless-stopped"
 
   mysql:
     image: mysql:5.5
@@ -53,6 +53,7 @@ services:
       - /var/lib/mysql:/var/lib/mysql 
     environment:
       - MYSQL_ROOT_PASSWORD
+    restart: "unless-stopped"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -62,6 +63,7 @@ services:
       - MYSQL_ROOT_PASSWORD
     links:
       - mysql:db
-
+    restart: "unless-stopped"
+    
 volumes:
   ngx:
