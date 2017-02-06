@@ -7,10 +7,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - docker_app:/var/www
-      - "/home/sangah:/home/sangah:ro"
-      - /etc/letsencrypt:/etc/ssl/app:ro
-      - "/var/www:/var/www/extra"
+      - docker_app:/var/www:ro
+      - /home/sangah:/home/sangah:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ${APACHE_SSL_CERT_PATH}:/etc/ssl/app:ro
+      - /var/www:/var/www/extra:ro
     links:
       - fileserver
     external_links:
