@@ -11,7 +11,7 @@ services:
       - /home/sangah:/home/sangah:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - ${APACHE_SSL_CERT_PATH}:/etc/ssl/app:ro
-      - /var/www:/var/www/extra:ro
+      - /var/www:/var/www2:ro
     links:
       - fileserver
     external_links:

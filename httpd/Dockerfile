@@ -8,6 +8,7 @@ RUN set -xe \
     && cp -v /setup/conf/sites-available/* /etc/apache2/sites-available \
     && /usr/sbin/a2ensite devnote.conf \
     && /usr/sbin/a2ensite pmis-manual.conf \
+    && /usr/sbin/a2ensite others.conf \
     && /usr/sbin/a2enconf maven.conf \
     && /usr/sbin/a2enconf owncloud.conf \
     && rm -rf /setup
