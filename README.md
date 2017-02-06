@@ -20,7 +20,8 @@
 
 ## Startup
 
-    $ docker-compose up --build -d
+    $ docker-compose build --pull
+    $ docker-compose up -d
 
 ## Shutdown
 
@@ -29,4 +30,4 @@
 ## Update
 
     $ git pull
-    $ docker-compose pull
+    $ docker-compose build --pull
