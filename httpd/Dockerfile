@@ -1,4 +1,4 @@
-FROM dev.sangah.com:5043/apache-base
+FROM dev.sangah.com:5043/apache-pmis
 MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 COPY . /setup
@@ -6,11 +6,8 @@ COPY . /setup
 RUN set -xe \
     && cp -v /setup/conf/conf-available/* /etc/apache2/conf-available \
     && cp -v /setup/conf/sites-available/* /etc/apache2/sites-available \
-    && cp -v /setup/conf/workers.properties /etc/libapache2-mod-jk \
     && /usr/sbin/a2ensite devnote.conf \
-    && /usr/sbin/a2ensite stnd-pmis.conf \
     && /usr/sbin/a2ensite pmis-manual.conf \
     && /usr/sbin/a2enconf maven.conf \
     && /usr/sbin/a2enconf owncloud.conf \
-    && /usr/sbin/a2enconf ssl.conf \
     && rm -rf /setup

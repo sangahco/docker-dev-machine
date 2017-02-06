@@ -7,16 +7,19 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - docker_app:/var/www
       - "/home/sangah:/home/sangah:ro"
-      - "/etc/letsencrypt:/etc/letsencrypt:ro"
-      - "/var/www:/var/www"
-      - "/var/log/apache2/docker:/var/log/apache2"
+      - /etc/letsencrypt:/etc/ssl/app:ro
+      - "/var/www:/var/www/extra"
     links:
       - fileserver
     external_links:
-      - was_stnd:was_stnd
+      - was_stnd:was
     environment:
       - APACHE_SSL
+      - APACHE_SSL_KEY
+      - APACHE_SSL_CERT
+      - APACHE_SSL_CHAIN
     restart: "unless-stopped"
 
   fileserver-php:
@@ -39,8 +42,6 @@ services:
     volumes:
     - ./owncloud/config.php:/var/www/html/config/config.php
     - /home/cloud/data:/var/www/html/data
-    #ports:
-    #  - "18080:80"
     links:
       - mysql:db
       - httpd:proxy
@@ -69,3 +70,5 @@ services:
     
 volumes:
   ngx:
+  docker_app:
+    external: true
