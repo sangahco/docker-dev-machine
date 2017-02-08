@@ -7,35 +7,16 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - docker_app:/var/www:ro
       - /home/sangah:/home/sangah:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - ${APACHE_SSL_CERT_PATH}:/etc/ssl/app:ro
-      - /var/www:/var/www2:ro
-    links:
-      - fileserver
-    external_links:
-      - was_stnd:was
+      - /var/www:/var/www/html:ro
     environment:
       - APACHE_SSL
       - APACHE_SSL_KEY
       - APACHE_SSL_CERT
       - APACHE_SSL_CHAIN
-    restart: "unless-stopped"
-
-  fileserver-php:
-    image: php:5.6-fpm
-    volumes:
-      - ngx:/etc/nginx/www
-    restart: "unless-stopped"
-
-  fileserver:
-    image: dev.sangah.com:5043/pmis-fileupload
-    volumes:
-      - ngx:/etc/nginx/www
-      - /tmp:/tmp
-    links:
-      - fileserver-php:php
+      - MACHINE_HOST
     restart: "unless-stopped"
 
   owncloud:
@@ -61,15 +42,13 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    ports:
-      - "18090:80"
     environment: 
       - MYSQL_ROOT_PASSWORD
     links:
       - mysql:db
     restart: "unless-stopped"
+    environment: 
+      - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
     
 volumes:
   ngx:
-  docker_app:
-    external: true
