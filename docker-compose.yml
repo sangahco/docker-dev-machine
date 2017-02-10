@@ -17,6 +17,7 @@ services:
       - APACHE_SSL_CERT
       - APACHE_SSL_CHAIN
       - MACHINE_HOST
+      - SECURED_RESOURCE_ALLOWED_IP
     restart: "unless-stopped"
 
   owncloud:

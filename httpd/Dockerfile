@@ -17,6 +17,7 @@ RUN set -xe \
     && /usr/sbin/a2ensite devnote.conf \
     && /usr/sbin/a2ensite pmis-manual.conf \
     && /usr/sbin/a2ensite others.conf \
+    && /usr/sbin/a2ensite pmis.conf \
     && /usr/sbin/a2enconf maven.conf \
     && /usr/sbin/a2enconf owncloud.conf \
     && cp docker-entrypoint.sh /entrypoint.sh \
