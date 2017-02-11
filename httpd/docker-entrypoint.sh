@@ -15,7 +15,7 @@ echo "- ssl chain file:  ${APACHE_SSL_CHAIN}"
 if [ "$APACHE_SSL" == "1" ]; then
     /usr/sbin/a2enconf ssl.conf
     sed -i 's/*:80/*:443/' /etc/apache2/sites-available/default.conf
-    sed -i 's/#SSLEngine On/SSLEngine On/' /etc/apache2/sites-available/default.conf
+    sed -i 's/#SSL/SSL/' /etc/apache2/sites-available/default.conf
 fi
 
 if [ $# -eq 0 ]; then
