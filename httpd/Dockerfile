@@ -4,6 +4,7 @@ MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 RUN apt-get update && apt-get -y install \
     libapache2-mod-php5 \
     php5-mysql \
+    php5-sqlite \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
