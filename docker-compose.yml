@@ -2,54 +2,38 @@ version: "2"
 
 services:
   httpd:
-    build: httpd
-    ports:
-      - "80:80"
-      - "443:443"
+    extends: 
+      file: common-services.yml
+      service: httpd
     volumes:
       - /home/sangah:/home/sangah:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
-      - ${APACHE_SSL_CERT_PATH}:/etc/ssl/app:ro
       - /var/www:/var/www/html
-    environment:
-      - APACHE_SSL
-      - APACHE_SSL_KEY
-      - APACHE_SSL_CERT
-      - APACHE_SSL_CHAIN
-      - MACHINE_HOST
-      - SECURED_RESOURCE_ALLOWED_IP
-    restart: "unless-stopped"
+      - ./httpd/conf/sites-available/pmis-manual.conf:/etc/apache2/sites-enabled/pmis-manual.conf
 
   owncloud:
-    image: owncloud:8.2.9
+    extends:
+      file: common-services.yml
+      service: owncloud
     volumes:
-    - ./owncloud/config.php:/var/www/html/config/config.php
-    - /home/cloud/data:/var/www/html/data
+      - /home/cloud/data:/var/www/html/data
     links:
       - mysql:db
       - httpd:proxy
     restart: "unless-stopped"
 
   mysql:
-    image: mysql:5.5
-    ports:
-      - "127.0.0.1:3306:3306"
+    extends:
+      file: common-services.yml
+      service: mysql
     volumes:
-      - ./mysql:/etc/mysql/conf.d
       - /var/lib/mysql:/var/lib/mysql 
-    environment:
-      - MYSQL_ROOT_PASSWORD
-    restart: "unless-stopped"
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment: 
-      - MYSQL_ROOT_PASSWORD
+    extends:
+      file: common-services.yml
+      service: phpmyadmin
     links:
       - mysql:db
-    restart: "unless-stopped"
     environment: 
       - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
-    
-volumes:
-  ngx:

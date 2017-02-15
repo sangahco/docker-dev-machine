@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  httpd:
+    build: httpd
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${APACHE_SSL_CERT_PATH}:/etc/ssl/app:ro
+    environment:
+      - APACHE_SSL
+      - APACHE_SSL_KEY
+      - APACHE_SSL_CERT
+      - APACHE_SSL_CHAIN
+      - MACHINE_HOST
+      - SECURED_RESOURCE_ALLOWED_IP
+    restart: "unless-stopped"
+
+  owncloud:
+    image: owncloud:8.2.9
+    volumes:
+    - ./owncloud/config.php:/var/www/html/config/config.php
+    restart: "unless-stopped"
+
+  mysql:
+    image: mysql:5.5
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./mysql:/etc/mysql/conf.d
+    environment:
+      - MYSQL_ROOT_PASSWORD
+    restart: "unless-stopped"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment: 
+      - MYSQL_ROOT_PASSWORD
+    restart: "unless-stopped"
