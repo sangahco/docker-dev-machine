@@ -1,4 +1,6 @@
 FROM dev.sangah.com:5043/apache-base
+#FROM dev.sangah.com:5043/apache-base-dev
+
 MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 RUN apt-get update && apt-get -y install \
@@ -12,8 +14,8 @@ COPY . /usr/local/src/
 WORKDIR /usr/local/src
 
 RUN set -xe \
-    && cp -v conf/conf-available/* /etc/apache2/conf-available \
-    && cp -v conf/sites-available/* /etc/apache2/sites-available \
+    && cp -a conf/conf-available/. /etc/apache2/conf-available \
+    && cp -a conf/sites-available/. /etc/apache2/sites-available \
 
     # Add sites here
     && /usr/sbin/a2ensite default.conf \
