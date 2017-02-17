@@ -2,6 +2,7 @@ version: "2"
 
 services:
   httpd:
+    build: httpd
     extends: 
       file: common-services.yml
       service: httpd

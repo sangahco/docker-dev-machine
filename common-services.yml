@@ -2,7 +2,6 @@ version: "2"
 
 services:
   httpd:
-    build: httpd
     ports:
       - "80:80"
       - "443:443"
