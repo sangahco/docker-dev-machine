@@ -2,10 +2,6 @@
 
 **httpd** - Apache HTTP Server
 
-**fileserver** - File Upload Handler
-
-**fileserver-php** - PHP for File Upload Handler
-
 **owncloud** - Owncloud Service
 
 **mysql** - MySql DB

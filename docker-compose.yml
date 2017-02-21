@@ -7,20 +7,20 @@ services:
       file: common-services.yml
       service: httpd
     volumes:
-      - /home/sangah:/home/sangah:ro
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - /var/www:/var/www/html
-      - ./httpd/conf/sites-available/pmis-manual.conf:/etc/apache2/sites-enabled/pmis-manual.conf
+    - /home/sangah:/home/sangah:ro
+    - /etc/letsencrypt:/etc/letsencrypt:ro
+    - /var/www:/var/www/html
+    - ./httpd/conf/sites-available/pmis-manual.conf:/etc/apache2/sites-enabled/pmis-manual.conf
 
   owncloud:
     extends:
       file: common-services.yml
       service: owncloud
     volumes:
-      - /home/cloud/data:/var/www/html/data
+    - ${OWNCLOUD_DATA}:/var/www/html/data
     links:
-      - mysql:db
-      - httpd:proxy
+    - mysql:db
+    - httpd:proxy
     restart: "unless-stopped"
 
   mysql:
@@ -28,13 +28,13 @@ services:
       file: common-services.yml
       service: mysql
     volumes:
-      - /var/lib/mysql:/var/lib/mysql 
+    - ${MYSQL_DATA}:/var/lib/mysql
 
   phpmyadmin:
     extends:
       file: common-services.yml
       service: phpmyadmin
     links:
-      - mysql:db
+    - mysql:db
     environment: 
-      - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
+    - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
