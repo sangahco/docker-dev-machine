@@ -12,6 +12,8 @@ services:
     - /etc/letsencrypt:/etc/letsencrypt:ro
     - /var/www:/var/www/html
     - ./httpd/conf/sites-available/pmis-manual.conf:/etc/apache2/sites-enabled/pmis-manual.conf
+    environment:
+    - APACHE_SSL=0
     networks: 
       default:
       hub_net:
