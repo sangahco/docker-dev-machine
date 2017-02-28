@@ -1,11 +1,9 @@
 version: "2"
 
 services:
+
   httpd:
     build: httpd
-    ports:
-    - "80:80"
-    - "443:443"
     extends: 
       file: common-services.yml
       service: httpd
@@ -14,6 +12,11 @@ services:
     - /etc/letsencrypt:/etc/letsencrypt:ro
     - /var/www:/var/www/html
     - ./httpd/conf/sites-available/pmis-manual.conf:/etc/apache2/sites-enabled/pmis-manual.conf
+    networks: 
+      default:
+      hub_net:
+        aliases: 
+        - ${HUB_INSTANCE}
     restart: "unless-stopped"
 
   owncloud:
@@ -44,3 +47,7 @@ services:
     environment: 
     - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
     restart: "unless-stopped"
+
+networks: 
+  hub_net:
+    external: true
