@@ -21,6 +21,8 @@ services:
     image: mysql:5.5
     volumes:
     - ./mysql:/etc/mysql/conf.d:ro
+    ports:
+    - 127.0.0.1:3306:3306
     environment:
     - MYSQL_ROOT_PASSWORD
 

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+# Apache gets grumpy about PID files pre-existing
+rm -f /var/run/apache2/apache2.pid
+
 APACHE_SSL=${APACHE_SSL:?missing}
 APACHE_SSL_KEY=${APACHE_SSL_KEY:-key.pem}
 APACHE_SSL_CERT=${APACHE_SSL_CERT:-cert.pem}

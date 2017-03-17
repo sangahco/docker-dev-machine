@@ -1,1 +1,0 @@
-FROM dev.sangah.com:5043/nginx-base
