@@ -33,14 +33,15 @@ services:
       service: mysql
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
+    networks: 
+      default:
+        aliases: [db, mysql]
     restart: "unless-stopped"
 
   phpmyadmin:
     extends:
       file: common-services.yml
       service: phpmyadmin
-    links:
-    - mysql:db
     environment: 
     - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
     restart: "unless-stopped"

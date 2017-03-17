@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  
+  mysql:
+    extends:
+      file: common-services.yml
+      service: mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=secret
+    networks: 
+      default:
+        aliases: [db, mysql]
+
+  phpmyadmin:
+    extends:
+      file: common-services.yml
+      service: phpmyadmin
+    ports: 
+    - 80:80
