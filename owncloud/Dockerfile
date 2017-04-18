@@ -1,0 +1,16 @@
+FROM owncloud:8.2.9
+
+RUN set -e && \
+  apt-get update && apt-get -y install \
+    gettext-base \
+    locales \
+    nano && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  fc-cache -fv && \
+  sed -i -e 's/# ko_KR.UTF-8 UTF-8/ko_KR.UTF-8 UTF-8/' /etc/locale.gen && \
+  echo 'LANG="ko_KR.UTF-8"'>/etc/default/locale && \
+  dpkg-reconfigure --frontend=noninteractive locales && \
+  update-locale LANG=ko_KR.UTF-8
+
+ENV LC_ALL=ko_KR.UTF8
