@@ -33,11 +33,11 @@ echo
 echo "Mode:"
 echo "  --prod          Production mode"
 echo "  --dev           Development mode"
+echo "  --with-hub      Use this option if behind the hub"
 echo "  --mysql-test    Test mysql with phpmyadmin only"
 echo
 echo "Options:"
 echo "  --help            Show this help message"
-echo "  --with-hub        Use this option if behind the hub"
 echo "  --owncloud-extra  Add extra local data folder to owncloud"
 echo
 echo "Commands:"
@@ -62,7 +62,7 @@ for i in "$@"; do
             shift
             ;;
         --with-hub)
-            CONF_ARG="$CONF_ARG -f docker-compose-with-hub.yml"
+            CONF_ARG="-f docker-compose-with-hub.yml"
             shift
             ;;
         --owncloud-extra)

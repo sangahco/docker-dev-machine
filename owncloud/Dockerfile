@@ -1,4 +1,5 @@
 FROM owncloud:8.2.9
+MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 RUN set -e && \
   apt-get update && apt-get -y install \

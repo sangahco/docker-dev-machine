@@ -22,6 +22,7 @@ services:
     restart: "unless-stopped"
 
   owncloud:
+    build: owncloud
     extends:
       file: common-services.yml
       service: owncloud
