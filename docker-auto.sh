@@ -30,10 +30,14 @@ fi
 usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
 echo
+echo "Mode:"
+echo "  --prod          Production mode"
+echo "  --dev           Development mode"
+echo "  --mysql-test    Test mysql with phpmyadmin only"
+echo
 echo "Options:"
 echo "  --help            Show this help message"
 echo "  --with-hub        Use this option if behind the hub"
-echo "  --mysql-test      Test mysql with phpmyadmin only"
 echo "  --owncloud-extra  Add extra local data folder to owncloud"
 echo
 echo "Commands:"
@@ -53,16 +57,16 @@ fi
 
 for i in "$@"; do
     case $i in
-        --with-hub)
-            CONF_ARG="-f docker-compose-with-hub.yml"
-            shift
-            ;;
         --mysql-test)
             CONF_ARG="-f docker-compose-mysql-test.yml"
             shift
             ;;
+        --with-hub)
+            CONF_ARG="$CONF_ARG -f docker-compose-with-hub.yml"
+            shift
+            ;;
         --owncloud-extra)
-            CONF_ARG="-f docker-compose-owncloud-extra.yml"
+            CONF_ARG="$CONF_ARG -f docker-compose-owncloud-extra.yml"
             shift
             ;;
         --help|-h)
