@@ -3,6 +3,7 @@ FROM owncloud:8.2.9
 RUN set -e && \
   apt-get update && apt-get -y install \
     gettext-base \
+    fontconfig \
     locales \
     nano && \
   apt-get clean && \

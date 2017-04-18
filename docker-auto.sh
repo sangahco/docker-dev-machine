@@ -40,8 +40,6 @@ echo "  ps              Show the status of the services"
 echo "  logs            Follow the logs on console"
 echo "  remove-all      Remove all containers"
 echo "  stop-all        Stop all containers running"
-echo "  build           Build the image"
-echo "  publish         Publish the image to the registry"
 }
 
 if [ $# -eq 0 ]; then
