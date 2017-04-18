@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  owncloud:
+    build: owncloud
+    extends:
+      file: common-services.yml
+      service: owncloud
+    volumes:
+    - ${OWNCLOUD_DATA}:/var/www/html/data
+    links:
+    - mysql:db
+    ports:
+    - 80:80
+    restart: "unless-stopped"
+
+  mysql:
+    extends:
+      file: common-services.yml
+      service: mysql
+    volumes:
+    - ${MYSQL_DATA}:/var/lib/mysql
+    networks: 
+      default:
+        aliases: [db, mysql]
+    restart: "unless-stopped"

@@ -22,7 +22,7 @@ services:
     restart: "unless-stopped"
 
   owncloud:
-    build: owncloud
+    image: ${REGISTRY_URL}/owncloud:0.1
     extends:
       file: common-services.yml
       service: owncloud
