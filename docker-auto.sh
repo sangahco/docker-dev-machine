@@ -31,7 +31,10 @@ usage() {
 echo "Usage:  $(basename "$0") [MODE] [OPTIONS] [COMMAND]"
 echo
 echo "Options:"
-echo "  --help          Show this help message"
+echo "  --help            Show this help message"
+echo "  --with-hub        Use this option if behind the hub"
+echo "  --mysql-test      Test mysql with phpmyadmin only"
+echo "  --owncloud-extra  Add extra local data folder to owncloud"
 echo
 echo "Commands:"
 echo "  up              Start the services"
