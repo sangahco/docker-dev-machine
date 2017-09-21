@@ -1,4 +1,4 @@
-FROM owncloud:8.2.9
+FROM owncloud:8.2
 MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 RUN set -e && \
@@ -6,7 +6,8 @@ RUN set -e && \
     gettext-base \
     fontconfig \
     locales \
-    nano && \
+    nano \
+    sudo && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
   fc-cache -fv && \

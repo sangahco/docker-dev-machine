@@ -6,8 +6,6 @@ services:
     extends:
       file: common-services.yml
       service: mysql
-    environment:
-    - MYSQL_ROOT_PASSWORD=secret
     networks: 
       default:
         aliases: [db, mysql]

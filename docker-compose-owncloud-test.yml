@@ -12,7 +12,6 @@ services:
     - mysql:db
     ports:
     - 80:80
-    restart: "unless-stopped"
 
   mysql:
     extends:
@@ -23,4 +22,10 @@ services:
     networks: 
       default:
         aliases: [db, mysql]
-    restart: "unless-stopped"
+
+  phpmyadmin:
+    extends:
+      file: common-services.yml
+      service: phpmyadmin
+    ports: 
+    - 8080:80
