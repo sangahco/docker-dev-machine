@@ -14,7 +14,6 @@ COPY . /usr/local/src/
 WORKDIR /usr/local/src
 
 RUN set -xe \
-    && cp -a conf/conf-available/. /etc/apache2/conf-available \
     && cp -a conf/sites-available/. /etc/apache2/sites-available \
 
     # Add sites here
