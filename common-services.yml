@@ -11,10 +11,14 @@ services:
     - APACHE_SSL_CHAIN
     - MACHINE_HOST
     - SECURED_RESOURCE_ALLOWED_IP
+    extends:
+      service: logging
 
   owncloud:
     volumes:
     - ./owncloud/config.php:/var/www/html/config/config.php
+    extends:
+      service: logging
 
   mysql:
     image: mysql:5.5
@@ -24,8 +28,19 @@ services:
     - 3306:3306
     environment:
     - MYSQL_ROOT_PASSWORD
+    extends:
+      service: logging
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment: 
     - MYSQL_ROOT_PASSWORD
+    extends:
+      service: logging
+
+  logging:
+    logging: 
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"

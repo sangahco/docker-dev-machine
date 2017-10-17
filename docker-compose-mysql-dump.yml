@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+
+  mysqldump:
+    image: mysql:5.5
+    environment:
+    - MYSQL_RANDOM_ROOT_PASSWORD=1
+    volumes:
+    - ${MYSQL_DUMP_DIR}:/tmp/dbdump
+    depends_on: 
+      - mysql
+    networks:
+      kakao-net:
+    command: mysqldump --lock-tables --host mysql --result-file /tmp/dbdump/${MYSQL_DUMP_FILE} -p${MYSQL_ROOT_PWD} --all-databases
