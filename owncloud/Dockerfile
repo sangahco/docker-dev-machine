@@ -1,4 +1,4 @@
-FROM owncloud:8.2
+FROM owncloud:8.2.11
 MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
 RUN set -e && \
