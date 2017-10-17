@@ -10,4 +10,4 @@ services:
     - ${MYSQL_DUMP_DIR}:/tmp/dbdump
     depends_on: 
       - mysql
-    command: mysqldump --lock-tables --host mysql --result-file /tmp/dbdump/${MYSQL_DUMP_FILE} -p${MYSQL_ROOT_PWD} --all-databases
+    command: mysqldump --lock-tables --host mysql --result-file /tmp/dbdump/${MYSQL_DUMP_FILE} -p${MYSQL_ROOT_PASSWORD} --all-databases
