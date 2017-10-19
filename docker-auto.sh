@@ -1,30 +1,39 @@
 #!/usr/bin/env bash
 
-#export CERTBOT_CERTS_PATH=/etc/letsencrypt
-#export CERTBOT_HOST=dev.sangah.com
-#export CERTBOT_EMAIL=pmis@sangah.com
-#export CERTBOT_WEBROOT=/var/www
-
 set -e
 
-DOCKER_COMPOSE_VERSION="1.11.2"
-CONF_ARG="-f docker-compose.yml"
 SCRIPT_BASE_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd "$SCRIPT_BASE_PATH"
 
-IMAGE_NAME="$IMAGE_NAME"
-if [ -z "$IMAGE_NAME" ]; then
-    IMAGE_NAME="$(cat .env | awk 'BEGIN { FS="="; } /^IMAGE_NAME/ {sub(/\r/,"",$2); print $2;}')"
-fi
-REGISTRY_URL="$REGISTRY_URL"
-if [ -z "$REGISTRY_URL" ]; then
-    REGISTRY_URL="$(cat .env | awk 'BEGIN { FS="="; } /^REGISTRY_URL/ {sub(/\r/,"",$2); print $2;}')"
-fi
+###############################################
+# Extract Environment Variables from .env file
+# Ex. REGISTRY_URL="$(getenv REGISTRY_URL)"
+###############################################
+getenv(){
+    local _env="$(printenv $1)"
+    echo "${_env:-$(cat .env | awk 'BEGIN { FS="="; } /^'$1'/ {sub(/\r/,"",$2); print $2;}')}"
+}
 
-if ! command -v docker-compose >/dev/null 2>&1; then
+DOCKER_COMPOSE_VERSION="1.14.0"
+CONF_ARG="-f docker-compose.yml"
+IMAGE_NAME="$(getenv IMAGE_NAME)"
+REGISTRY_URL="$(getenv REGISTRY_URL)"
+
+########################################
+# Install docker-compose
+# DOCKER_COMPOSE_VERSION need to be set
+########################################
+install_docker_compose() {
     sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" \
     -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
+    return 0
+}
+
+if ! command -v docker-compose >/dev/null 2>&1; then
+    install_docker_compose
+elif [[ "$(docker-compose version --short)" != "$DOCKER_COMPOSE_VERSION" ]]; then
+    install_docker_compose
 fi
 
 usage() {
@@ -39,6 +48,7 @@ echo
 echo "Options:"
 echo "  --help            Show this help message"
 echo "  --owncloud-extra  Add extra local data folder to owncloud"
+echo "  --mysql-dump      Backup the entire mysql database"
 echo
 echo "Commands:"
 echo "  up              Start the services"
@@ -59,6 +69,10 @@ for i in "$@"; do
     case $i in
         --mysql-test)
             CONF_ARG="-f docker-compose-mysql-test.yml"
+            shift
+            ;;
+        --mysql-dump)
+            CONF_ARG="$CONF_ARG -f docker-compose-mysql-dump.yml"
             shift
             ;;
         --with-hub)
@@ -88,7 +102,7 @@ if [ "$1" == "login" ]; then
 elif [ "$1" == "up" ]; then
     docker-compose $CONF_ARG pull
     docker-compose $CONF_ARG build --pull
-    docker-compose $CONF_ARG up -d --remove-orphans
+    docker-compose $CONF_ARG up -d
     exit 0
 
 elif [ "$1" == "stop-all" ]; then
