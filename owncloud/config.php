@@ -21,5 +21,6 @@ $CONFIG = array (
   'maintenance' => false,
   'trashbin_retention_obligation' => 'auto',
   'filesystem_check_changes' => false,
-  'logtimezone' => 'UTC'
+  'logtimezone' => 'UTC',
+  'theme' => 'sangah'
 );

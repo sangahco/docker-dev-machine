@@ -8,6 +8,7 @@ services:
       service: owncloud
     volumes:
     - ${OWNCLOUD_DATA}:/var/www/html/data
+    - ./owncloud/themes:/var/www/html/themes
     links:
     - mysql:db
     ports:
