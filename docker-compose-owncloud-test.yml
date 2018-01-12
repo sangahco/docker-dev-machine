@@ -8,8 +8,6 @@ services:
       service: owncloud
     volumes:
     - ${OWNCLOUD_DATA}:/var/www/html/data
-    links:
-    - mysql:db
     ports:
     - "80"
 
@@ -19,6 +17,3 @@ services:
       service: mysql
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
-    networks: 
-      default:
-        aliases: [db, mysql]

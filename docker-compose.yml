@@ -23,9 +23,9 @@ services:
       service: owncloud
     volumes:
     - ${OWNCLOUD_DATA}:/var/www/html/data
-    links:
-    - mysql:db
-    - httpd:proxy
+    depends_on: 
+    - http
+    - mysql
     restart: "unless-stopped"
 
   mysql:
@@ -34,9 +34,8 @@ services:
       service: mysql
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
-    networks: 
-      default:
-        aliases: [db, mysql]
+    ports:
+    - 3306:3306
     restart: "unless-stopped"
 
   phpmyadmin:
