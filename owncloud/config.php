@@ -14,13 +14,12 @@ $CONFIG = array (
   'installed' => false,
   'forcessl' => true,
   'forceSSLforSubdomains' => true,
-  'theme' => '',
+  'theme' => 'sangah',
   'log_type' => 'syslog',
   'logfile' => '',
   'loglevel' => 3,
   'maintenance' => false,
   'trashbin_retention_obligation' => 'auto',
   'filesystem_check_changes' => false,
-  'logtimezone' => 'UTC',
-  'theme' => 'sangah'
+  'logtimezone' => 'UTC'
 );
