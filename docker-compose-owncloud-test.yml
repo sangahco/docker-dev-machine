@@ -8,6 +8,8 @@ services:
       service: owncloud
     volumes:
     - ${OWNCLOUD_DATA}:/var/www/html/data
+    depends_on:
+    - mysql
     ports:
     - "80"
 
