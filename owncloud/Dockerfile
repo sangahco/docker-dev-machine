@@ -1,5 +1,5 @@
 FROM owncloud:9.0
-MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
+LABEL maintainer="Emanuele Disco <emanuele.disco@gmail.com>"
 
 RUN set -e && \
   apt-get update && apt-get -y install \
@@ -17,3 +17,6 @@ RUN set -e && \
   update-locale LANG=ko_KR.UTF-8
 
 ENV LC_ALL=ko_KR.UTF8
+
+# we copy the themes folder into owncloud image
+COPY ./themes /var/www/html/
