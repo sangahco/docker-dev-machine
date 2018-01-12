@@ -8,10 +8,8 @@ services:
       service: owncloud
     volumes:
     - ${OWNCLOUD_DATA}:/var/www/html/data
-    links:
-    - mysql:db
     ports:
-    - 80:80
+    - "80"
 
   mysql:
     extends:
@@ -19,13 +17,3 @@ services:
       service: mysql
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
-    networks: 
-      default:
-        aliases: [db, mysql]
-
-  phpmyadmin:
-    extends:
-      file: common-services.yml
-      service: phpmyadmin
-    ports: 
-    - 8080:80
