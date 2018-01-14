@@ -1,4 +1,4 @@
-FROM owncloud:9.0
+FROM owncloud:9.0.11
 LABEL maintainer="Emanuele Disco <emanuele.disco@gmail.com>"
 
 RUN set -e && \
