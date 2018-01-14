@@ -1,5 +1,5 @@
 FROM owncloud:9.0.11
-MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
+LABEL maintainer="Emanuele Disco <emanuele.disco@gmail.com>"
 
 RUN set -e && \
   apt-get update && apt-get -y install \
