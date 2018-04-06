@@ -4,6 +4,7 @@ services:
   httpd:
     volumes:
     - ${APACHE_SSL_CERT_PATH}:/etc/ssl/app:ro
+    - ${SQLDESIGNER_DATA}:/var/lib/sqldesigner
     environment:
     - APACHE_SSL
     - APACHE_SSL_KEY

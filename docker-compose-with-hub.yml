@@ -11,6 +11,7 @@ services:
     - /home/sangah:/home/sangah:ro
     - /etc/letsencrypt:/etc/letsencrypt:ro
     - /var/www:/var/www/html
+    - ./sqldesigner:/var/www/html/sqldesigner
     - ./httpd/conf/sites-available/pmis-manual.conf:/etc/apache2/sites-enabled/pmis-manual.conf
     environment:
     - APACHE_SSL=0
