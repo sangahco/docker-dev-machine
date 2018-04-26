@@ -40,6 +40,8 @@ services:
       service: mysql
     volumes:
     - ${MYSQL_DATA}:/var/lib/mysql
+    ports:
+    - 3306:3306
     networks: 
       default:
         aliases: [db, mysql]
