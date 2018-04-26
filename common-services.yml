@@ -25,7 +25,7 @@ services:
       service: logging
 
   mysql:
-    image: mysql:5.5
+    image: mysql:5.6
     volumes:
     - ./mysql:/etc/mysql/conf.d:ro
     environment:
