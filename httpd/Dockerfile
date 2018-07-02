@@ -15,7 +15,6 @@ WORKDIR /usr/local/src
 
 RUN set -xe \
     && cp -a conf/sites-available/. /etc/apache2/sites-available \
-
     # Add sites here
     && /usr/sbin/a2ensite default.conf \
     && /usr/sbin/a2ensite devnote.conf \
@@ -23,7 +22,6 @@ RUN set -xe \
     && /usr/sbin/a2ensite others.conf \
     && /usr/sbin/a2ensite maven.conf \
     && /usr/sbin/a2ensite owncloud.conf \
-
     && cp docker-entrypoint.sh /entrypoint.sh \
     && rm -rf /usr/local/src
 
