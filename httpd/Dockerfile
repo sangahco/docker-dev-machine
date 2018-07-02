@@ -1,5 +1,4 @@
-FROM dev.sangah.com:5043/apache-base
-#FROM dev.sangah.com:5043/apache-base-dev
+FROM sangah/apache-base
 
 MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
