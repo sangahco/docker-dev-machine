@@ -16,7 +16,6 @@ RUN set -xe \
     && cp -a conf/sites-available/. /etc/apache2/sites-available \
     # Add sites here
     && /usr/sbin/a2ensite default.conf \
-    && /usr/sbin/a2ensite devnote.conf \
     && /usr/sbin/a2ensite pmis-manual.conf \
     && /usr/sbin/a2ensite others.conf \
     && /usr/sbin/a2ensite maven.conf \
