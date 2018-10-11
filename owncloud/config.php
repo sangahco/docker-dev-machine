@@ -8,7 +8,7 @@ $CONFIG = array (
   array (
     0 => 'proxy',
   ),
-  'datadirectory' => '/var/www/html/data',
+  'datadirectory' => '/mnt/data',
   'overwritewebroot' => '/owncloud',
   'dbhost' => 'db',
   'dbtableprefix' => 'oc_',

@@ -9,6 +9,8 @@ services:
     networks: 
       default:
         aliases: [db, mysql]
+    volumes:
+    - mysql:/var/lib/mysql
 
   phpmyadmin:
     extends:
@@ -16,3 +18,7 @@ services:
       service: phpmyadmin
     ports: 
     - 80:80
+
+volumes:
+  mysql:
+    driver: local
