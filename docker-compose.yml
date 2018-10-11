@@ -23,7 +23,7 @@ services:
       file: common-services.yml
       service: owncloud
     volumes:
-    - ${OWNCLOUD_DATA}:/var/www/html/data
+    - ${OWNCLOUD_DATA}:/mnt/data
     depends_on: 
     - httpd
     - mysql

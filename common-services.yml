@@ -19,8 +19,6 @@ services:
       service: logging
 
   owncloud:
-    volumes:
-    - ./owncloud/config.php:/mnt/data/config/config.php
     extends:
       service: logging
 
