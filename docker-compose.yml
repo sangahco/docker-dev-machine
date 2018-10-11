@@ -18,7 +18,7 @@ services:
     restart: "unless-stopped"
 
   owncloud:
-    image: ${REGISTRY_URL}/owncloud:0.1
+    image: ${REGISTRY_URL}/owncloud:${OWNCLOUD_VERSION}
     extends:
       file: common-services.yml
       service: owncloud
