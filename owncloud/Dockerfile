@@ -19,4 +19,4 @@ RUN set -e && \
 ENV LC_ALL=ko_KR.UTF8
 
 # we copy the themes folder into owncloud image
-COPY ./themes /var/www/html/themes
+COPY ./themes /var/www/owncloud/themes
