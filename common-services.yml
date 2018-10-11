@@ -19,10 +19,14 @@ services:
       service: logging
 
   owncloud:
-    volumes:
-    - ./owncloud/config.php:/var/www/html/config/config.php
     extends:
       service: logging
+    environment:
+    - OWNCLOUD_DB_TYPE
+    - OWNCLOUD_DB_NAME
+    - OWNCLOUD_DB_USERNAME
+    - OWNCLOUD_DB_PASSWORD
+    - OWNCLOUD_DB_HOST
 
   mysql:
     image: mysql:5.6

@@ -123,7 +123,7 @@ elif [ "$1" == "logs" ]; then
 
 elif [ "$1" == "occ" ]; then
     shift
-    docker-compose $CONF_ARG exec owncloud chown www-data: config/config.php
+    docker-compose $CONF_ARG exec owncloud chown -R www-data: config
     docker-compose $CONF_ARG exec owncloud sudo -u www-data php occ "$@"
     exit 0
 
