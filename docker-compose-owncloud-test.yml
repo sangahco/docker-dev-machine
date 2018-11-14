@@ -23,7 +23,7 @@ services:
     volumes:
     - mysql:/var/lib/mysql
     environment:
-    - MYSQL_ROOT_PASSWORD
+    - MYSQL_ROOT_PASSWORD=changeme
     networks: 
       default:
         aliases: [db, mysql]
