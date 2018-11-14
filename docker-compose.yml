@@ -22,9 +22,20 @@ services:
     extends:
       file: common-services.yml
       service: owncloud
+    environment: 
+    - OWNCLOUD_REDIS_ENABLED=true
+    - OWNCLOUD_REDIS_HOST=redis
     volumes:
     - ${OWNCLOUD_DATA}:/mnt/data
     depends_on: 
     - httpd
     - mysql
     restart: "unless-stopped"
+
+  redis:
+    image: webhippie/redis:latest
+    restart: always
+    environment:
+      - REDIS_DATABASES=1
+    volumes:
+    - redis:/var/lib/redis
