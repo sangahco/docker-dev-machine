@@ -19,25 +19,17 @@ services:
     - "80"
 
   mysql:
-    extends:
-      file: common-services.yml
-      service: mysql
+    image: mysql:5.6
+    volumes:
+    - mysql:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=changeme
     networks: 
       default:
         aliases: [db, mysql]
-    volumes:
-    - mysql:/var/lib/mysql
-
-  phpmyadmin:
-    extends:
-      file: common-services.yml
-      service: phpmyadmin
-    ports: 
-    - 80:80
 
   redis:
     image: webhippie/redis:latest
-    restart: always
     environment:
       - REDIS_DATABASES=1
     volumes:

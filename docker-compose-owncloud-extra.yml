@@ -1,7 +1,0 @@
-version: "2"
-
-services:
-
-  owncloud:
-    volumes:
-    - /media/pcity_disk:/data/extra

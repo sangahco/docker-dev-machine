@@ -22,6 +22,9 @@ services:
     extends:
       file: common-services.yml
       service: owncloud
+    environment: 
+    - OWNCLOUD_REDIS_ENABLED=true
+    - OWNCLOUD_REDIS_HOST=redis
     volumes:
     - ${OWNCLOUD_DATA}:/mnt/data
     depends_on: 
@@ -29,20 +32,14 @@ services:
     - mysql
     restart: "unless-stopped"
 
-  mysql:
-    extends:
-      file: common-services.yml
-      service: mysql
+  redis:
+    image: webhippie/redis:latest
+    environment:
+      - REDIS_DATABASES=1
     volumes:
-    - ${MYSQL_DATA}:/var/lib/mysql
-    ports:
-    - 3306:3306
+    - redis:/var/lib/redis
     restart: "unless-stopped"
 
-  phpmyadmin:
-    extends:
-      file: common-services.yml
-      service: phpmyadmin
-    environment: 
-    - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
-    restart: "unless-stopped"
+volumes:
+  redis:
+    driver: local

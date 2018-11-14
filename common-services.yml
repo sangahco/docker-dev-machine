@@ -28,25 +28,6 @@ services:
     - OWNCLOUD_DB_PASSWORD
     - OWNCLOUD_DB_HOST
 
-  mysql:
-    image: mysql:5.6
-    volumes:
-    - ./mysql:/etc/mysql/conf.d:ro
-    environment:
-    - MYSQL_ROOT_PASSWORD
-    networks: 
-      default:
-        aliases: [db, mysql]
-    extends:
-      service: logging
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment: 
-    - MYSQL_ROOT_PASSWORD
-    extends:
-      service: logging
-
   logging:
     logging: 
       driver: "json-file"

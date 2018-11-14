@@ -43,11 +43,9 @@ echo "Mode:"
 echo "  --prod          Production mode"
 echo "  --dev           Development mode"
 echo "  --with-hub      Use this option if behind the hub"
-echo "  --mysql-test    Test mysql with phpmyadmin only"
 echo
 echo "Options:"
 echo "  --help            Show this help message"
-echo "  --owncloud-extra  Add extra local data folder to owncloud"
 echo "  --mysql-dump      Backup the entire mysql database"
 echo
 echo "Commands:"
@@ -68,20 +66,12 @@ fi
 
 for i in "$@"; do
     case $i in
-        --mysql-test)
-            CONF_ARG="-f docker-compose-mysql-test.yml"
-            shift
-            ;;
         --mysql-dump)
             CONF_ARG="$CONF_ARG -f docker-compose-mysql-dump.yml"
             shift
             ;;
         --with-hub)
             CONF_ARG="-f docker-compose-with-hub.yml"
-            shift
-            ;;
-        --owncloud-extra)
-            CONF_ARG="$CONF_ARG -f docker-compose-owncloud-extra.yml"
             shift
             ;;
         --help|-h)
