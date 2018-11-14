@@ -30,7 +30,6 @@ services:
 
   redis:
     image: webhippie/redis:latest
-    restart: always
     environment:
       - REDIS_DATABASES=1
     volumes:
