@@ -47,3 +47,7 @@ services:
 networks: 
   hub_net:
     external: true
+
+volumes:
+  redis:
+    driver: local
