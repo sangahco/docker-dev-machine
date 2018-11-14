@@ -30,29 +30,7 @@ services:
     volumes:
     - ${OWNCLOUD_DATA}:/mnt/data
     links:
-    - mysql:db
     - httpd:proxy
-    restart: "unless-stopped"
-
-  mysql:
-    extends:
-      file: common-services.yml
-      service: mysql
-    volumes:
-    - ${MYSQL_DATA}:/var/lib/mysql
-    ports:
-    - 3306:3306
-    networks: 
-      default:
-        aliases: [db, mysql]
-    restart: "unless-stopped"
-
-  phpmyadmin:
-    extends:
-      file: common-services.yml
-      service: phpmyadmin
-    environment: 
-    - PMA_ABSOLUTE_URI=https://dev.sangah.com/mysqladmin/
     restart: "unless-stopped"
 
 networks: 
