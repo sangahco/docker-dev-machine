@@ -2,6 +2,7 @@ FROM sangah/apache-base
 
 MAINTAINER Emanuele Disco <emanuele.disco@gmail.com>
 
+RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 RUN apt-get update && apt-get -y install \
     libapache2-mod-php5 \
     php5-mysql \
