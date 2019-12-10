@@ -29,7 +29,6 @@ services:
     - ${OWNCLOUD_DATA}:/mnt/data
     depends_on: 
     - httpd
-    - mysql
     restart: "unless-stopped"
 
   redis:
