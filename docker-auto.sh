@@ -46,7 +46,6 @@ echo "  --with-hub      Use this option if behind the hub"
 echo
 echo "Options:"
 echo "  --help            Show this help message"
-echo "  --mysql-dump      Backup the entire mysql database"
 echo
 echo "Commands:"
 echo "  up              Start the services"
@@ -66,10 +65,6 @@ fi
 
 for i in "$@"; do
     case $i in
-        --mysql-dump)
-            CONF_ARG="$CONF_ARG -f docker-compose-mysql-dump.yml"
-            shift
-            ;;
         --with-hub)
             CONF_ARG="-f docker-compose-with-hub.yml"
             shift

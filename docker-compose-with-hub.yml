@@ -2,26 +2,6 @@ version: "2"
 
 services:
 
-  httpd:
-    build: httpd
-    extends: 
-      file: common-services.yml
-      service: httpd
-    volumes:
-    - /home/sangah:/home/sangah:ro
-    - /etc/letsencrypt:/etc/letsencrypt:ro
-    - /var/www:/var/www/html
-    - ./sqldesigner:/var/www/html/sqldesigner
-    - ./httpd/conf/sites-available/pmis-manual.conf:/etc/apache2/sites-enabled/pmis-manual.conf
-    environment:
-    - APACHE_SSL=0
-    networks: 
-      default:
-      hub_net:
-        aliases: 
-        - ${HUB_INSTANCE}
-    restart: "unless-stopped"
-
   owncloud:
     image: ${REGISTRY_URL}/owncloud:${OWNCLOUD_VERSION}
     extends:
@@ -32,8 +12,11 @@ services:
     - OWNCLOUD_REDIS_HOST=redis
     volumes:
     - ${OWNCLOUD_DATA}:/mnt/data
-    links:
-    - httpd:proxy
+    networks: 
+      default:
+      hub_net:
+        aliases: 
+        - ${HUB_INSTANCE}
     restart: "unless-stopped"
 
   redis:
