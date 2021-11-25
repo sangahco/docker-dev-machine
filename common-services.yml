@@ -1,23 +1,7 @@
 version: "2"
 
 services:
-  httpd:
-    volumes:
-    - ${APACHE_SSL_CERT_PATH}:/etc/ssl/app:ro
-    - ${SQLDESIGNER_DATA}:/var/lib/sqldesigner
-    environment:
-    - APACHE_SSL
-    - APACHE_SSL_KEY
-    - APACHE_SSL_CERT
-    - APACHE_SSL_CHAIN
-    - MACHINE_HOST
-    - SECURED_RESOURCE_ALLOWED_IP
-    networks: 
-      default:
-        aliases: [proxy]
-    extends:
-      service: logging
-
+ 
   owncloud:
     extends:
       service: logging
