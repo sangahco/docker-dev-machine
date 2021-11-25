@@ -16,4 +16,6 @@ RUN set -e && \
   dpkg-reconfigure --frontend=noninteractive locales && \
   update-locale LANG=ko_KR.UTF-8
 
+RUN update-ca-certificates
+
 ENV LC_ALL=ko_KR.UTF8
